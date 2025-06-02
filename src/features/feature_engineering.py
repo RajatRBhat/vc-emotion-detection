@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 import os
 
@@ -24,7 +24,7 @@ y_train = train_data['sentiment'].values
 X_test = test_data['content'].values
 y_test = test_data['sentiment'].values
 
-vectorizer = CountVectorizer(max_features=max_features)
+vectorizer = TfidfVectorizer(max_features=max_features)
 
 # Fit the vectorizer on the training data and transform it
 X_train_bow = vectorizer.fit_transform(X_train)
@@ -42,5 +42,5 @@ data_path = os.path.join("data", "interim")
 
 os.makedirs(data_path, exist_ok=True)
 
-train_df.to_csv(os.path.join(data_path, "train_bow.csv"), index=False)
-test_df.to_csv(os.path.join(data_path, "test_bow.csv"),index=False)
+train_df.to_csv(os.path.join(data_path, "train_tfidf.csv"), index=False)
+test_df.to_csv(os.path.join(data_path, "test_tfidf.csv"),index=False)

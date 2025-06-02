@@ -10,7 +10,7 @@ with open('models/model.pkl', 'rb') as fobj:
     clf = pickle.load(fobj)
 
 
-test_data = pd.read_csv("./data/interim/test_bow.csv")
+test_data = pd.read_csv("./data/interim/test_tfidf.csv")
 
 X_test = test_data.iloc[:,:-1].values
 y_test = test_data.iloc[:,-1].values
@@ -31,5 +31,5 @@ metrics_dict = {
     "auc": auc
 }
 
-with open("metrics.json", "w") as fobj:
+with open("reports/metrics.json", "w") as fobj:
     json.dump(metrics_dict, fobj, indent=4)
