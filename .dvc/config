@@ -1,0 +1,4 @@
+[core]
+    remote = piperemote
+['remote "piperemote"']
+    url = /Users/rajatbhat/RajatPersonal/NSL/Campusx/MLOps/data-storage/pipestorage
