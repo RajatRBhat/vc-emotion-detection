@@ -10,7 +10,7 @@ with open('models/model.pkl', 'rb') as fobj:
     clf = pickle.load(fobj)
 
 
-test_data = pd.read_csv("./data/interim/test_tfidf.csv")
+test_data = pd.read_csv("./data/interim/test_bow.csv")
 
 X_test = test_data.iloc[:,:-1].values
 y_test = test_data.iloc[:,-1].values
