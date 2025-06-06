@@ -2,9 +2,13 @@ import numpy as np
 import pandas as pd
 import pickle
 import json
+import yaml
+from dvclive import Live
 
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score, recall_score, roc_auc_score
+
+params = yaml.safe_load(open('params.yaml', 'r'))
 
 with open('models/model.pkl', 'rb') as fobj:
     clf = pickle.load(fobj)
@@ -24,6 +28,16 @@ precision = precision_score(y_test, y_pred)
 recall = recall_score(y_test, y_pred)
 auc = roc_auc_score(y_test, y_pred_proba)
 
+with Live(save_dvc_exp=True) as live:
+    live.log_metric('accuracy', accuracy)
+    live.log_metric('precision', precision)
+    live.log_metric('recall', recall)
+    live.log_metric('auc', auc)
+
+    for param, value in params.items():
+        for key, val in value.items():
+            live.log_param(f'{param}_{key}', val)
+    
 metrics_dict = {
     "accuracy":accuracy,
     "precision":precision,
